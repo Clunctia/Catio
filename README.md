@@ -1,7 +1,7 @@
 # Catio
 
 
-# Poit
+# Point
 1. Use case 10%
 2. Domain Model 10%
 3. Design Principle 20%
