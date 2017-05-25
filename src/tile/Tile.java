@@ -1,6 +1,7 @@
 package tile;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 import Catio.Handler;
 import Catio.Id;
@@ -67,6 +68,10 @@ public abstract class Tile {
 
 	public void setVelY(int velY) {
 		this.velY = velY;
+	}
+	
+	public Rectangle getBounds(){
+		return new Rectangle(x, y, width, height);
 	}
 	
 	

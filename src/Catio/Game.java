@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 
 import entity.Player;
 import input.KeyInput;
+import tile.Wall;
 
 public class Game extends Canvas implements Runnable {
 	

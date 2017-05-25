@@ -5,6 +5,7 @@ import java.util.LinkedList;
 
 import entity.Entity;
 import tile.Tile;
+import tile.Wall;
 
 public class Handler {
 	public LinkedList<Entity> entity = new LinkedList<Entity>();
@@ -17,6 +18,10 @@ public class Handler {
 		for(Tile ti : tile){
 			ti.render(g);
 		}
+	}
+	
+	public Handler(){
+		createLevel();
 	}
 	
 	public void tick(){
@@ -42,5 +47,12 @@ public class Handler {
 	
 	public void removeTile(Tile ti){
 		tile.remove(ti);
+	}
+	
+	public void createLevel(){
+		for(int i=0 ; i < Game.WIDTH*Game.SCALE/64+1 ; i++){
+			addTile(new Wall(i*64, Game.HEIGHT*Game.SCALE-64, 64, 64, true, Id.wall, this));
+			if(i!=0 && i!=1 && i!= 16 && i!= 17) addTile(new Wall(i*64, 300, 64, 64, true, Id.wall, this));
+		}
 	}
 }

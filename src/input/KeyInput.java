@@ -7,23 +7,24 @@ import Catio.Game;
 import entity.Entity;
 
 public class KeyInput implements KeyListener{
-
+	
+	//Will change to arrow keys.
 	@Override
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
 		for(Entity en:Game.handler.entity){
 			switch(key){
 			case KeyEvent.VK_W:
-				en.setVelY(-5);
-				break;
-			case KeyEvent.VK_S:
-				en.setVelY(5);
+				if(!en.jumping) {
+					en.jumping = true;
+					en.gravity = 10.0;
+				}
 				break;
 			case KeyEvent.VK_A:
-				en.setVelX(-5);
+				en.setVelX(-2);
 				break;
 			case KeyEvent.VK_D:
-				en.setVelX(5);
+				en.setVelX(2);
 				break;
 			}
 		}
