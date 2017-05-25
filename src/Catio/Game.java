@@ -1,3 +1,4 @@
+package Catio;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -6,12 +7,16 @@ import java.awt.image.BufferStrategy;
 
 import javax.swing.JFrame;
 
+import entity.Player;
+import input.KeyInput;
+
 public class Game extends Canvas implements Runnable {
 	
 	public static final int WIDTH = 270;
 	public static final int HEIGHT = WIDTH/14*10;
 	public static final int SCALE = 4;
-	public static final String TITLE = "Mario";
+	public static final String TITLE = "Catio";
+	public static Handler handler;
 	
 	private Thread thread;
 	private boolean running = false;
@@ -34,6 +39,8 @@ public class Game extends Canvas implements Runnable {
 	}
 	
 	public void run(){
+		init();
+		requestFocus();
 		long lastTime = System.nanoTime();
 		long timer = System.currentTimeMillis();
 		double delta = 0.0;
@@ -68,14 +75,19 @@ public class Game extends Canvas implements Runnable {
 		Graphics g = bs.getDrawGraphics();
 		g.setColor(Color.CYAN);
 		g.fillRect(0,0,getWidth(),getHeight());
-		g.setColor(Color.ORANGE);
-		g.fillRect(200,200,getWidth()-400,getHeight()-400);
+		handler.render(g);
 		g.dispose();
 		bs.show();
 	}
 	
 	public void tick(){
-		
+		handler.tick();
+	}
+	
+	private void init(){
+		handler = new Handler();
+		addKeyListener(new KeyInput());
+		handler.addEntity(new Player(300, 512, 64, 64, true, Id.player, handler));
 	}
 	
 	public Game(){
