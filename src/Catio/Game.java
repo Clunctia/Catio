@@ -13,7 +13,7 @@ import javax.swing.JFrame;
 import Catio.graphic.Sprite;
 import Catio.graphic.SpriteSheet;
 import entity.Entity;
-import entity.Player;
+import entity.mob.Player;
 import input.KeyInput;
 import tile.Wall;
 
@@ -27,7 +27,8 @@ public class Game extends Canvas implements Runnable {
 	public static SpriteSheet sheet;
 	public static Camera cam;
 	public static Sprite grass;
-	public static Sprite player[];
+	public static Sprite []player;
+	public static Sprite []goomba;
 	public static Sprite mushroom;
 	public static String levelPath = "/level.png";
 	
@@ -120,6 +121,7 @@ public class Game extends Canvas implements Runnable {
 		grass = new Sprite(sheet,1,1);
 		player = new Sprite[10];
 		mushroom = new Sprite(sheet,2,1);
+		goomba = new Sprite[8];
 		addKeyListener(new KeyInput());
 		
 		
@@ -127,6 +129,9 @@ public class Game extends Canvas implements Runnable {
 			player[i] = new Sprite(sheet,i+1,32/2);
 		}
 		
+		for(int i=0;i<goomba.length;i++){
+			goomba[i] = new Sprite(sheet,i+1,32/2-1);
+		}
 		
 		try {
 			image = ImageIO.read(getClass().getResource(levelPath));

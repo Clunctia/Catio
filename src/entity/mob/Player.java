@@ -1,4 +1,4 @@
-package entity;
+package entity.mob;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import Catio.Game;
 import Catio.Handler;
 import Catio.Id;
+import entity.Entity;
 import tile.Tile;
 
 public class Player extends Entity {
@@ -21,10 +22,10 @@ public class Player extends Entity {
 	@Override
 	public void render(Graphics g) {
 		if (facing == 0) {
-			g.drawImage(Game.player[frame + 5].getBufferedImage(), x, y, width, height, null);
+			g.drawImage(Game.goomba[frame + 5].getBufferedImage(), x, y, width, height, null);
 
 		} else if (facing == 1) {
-			g.drawImage(Game.player[frame].getBufferedImage(), x, y, width, height, null);
+			g.drawImage(Game.goomba[frame].getBufferedImage(), x, y, width, height, null);
 		}
 	}
 
@@ -75,6 +76,10 @@ public class Player extends Entity {
 					setY(tpY-height);
 					
 					e.die();
+				}else if(e.getId()==Id.goomba){
+					if(getBounds().intersects(e.getBounds())){
+						die();
+					}
 				}
 			}
 		}

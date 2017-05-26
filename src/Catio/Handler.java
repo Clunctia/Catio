@@ -5,7 +5,8 @@ import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 
 import entity.Entity;
-import entity.Player;
+import entity.mob.Goomba;
+import entity.mob.Player;
 import entity.powerup.Mushroom;
 import tile.Tile;
 import tile.Wall;
@@ -62,7 +63,8 @@ public class Handler {
 				
 				if(red == 0 && green == 0 && blue ==0) addTile(new Wall(x*64, y*64, 64, 64, true, Id.wall, this));
 				if(red == 0 && green == 0 && blue ==255) addEntity(new Player(x*64, y*64, 64, 64, false, Id.player, this));
-				if(red == 255 && green == 0 && blue ==0 ) addEntity(new Mushroom(x*64,y*64,64,64,true,Id.mushroom,this));
+				if(red == 255 && green == 0 && blue ==0) addEntity(new Mushroom(x*64,y*64,64,64,true,Id.mushroom,this));
+				if(red == 0 && green == 255 && blue == 255) addEntity(new Goomba(x*64,y*64,64,64,true,Id.goomba,this));
 			}
 		}
 	}

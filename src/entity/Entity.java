@@ -11,6 +11,8 @@ public abstract class Entity {
 	public int facing = 0;//0=left
 	public int velX, velY;
 	public double gravity;
+	public int frame = 0;
+	public int frameDelay = 0;
 	
 	public Id id;
 	public Handler handler;
