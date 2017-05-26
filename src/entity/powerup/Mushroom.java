@@ -14,7 +14,7 @@ public class Mushroom extends Entity {
 
 	public Mushroom(int x, int y, int width, int height, boolean solid, Id id, Handler handler) {
 		super(x, y, width, height, solid, id, handler);
-		// TODO Auto-generated constructor stub
+		
 		int dir = random.nextInt(2);
 		switch(dir){
 		case 0:

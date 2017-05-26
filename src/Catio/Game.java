@@ -31,6 +31,7 @@ public class Game extends Canvas implements Runnable {
 	public static Sprite []goomba;
 	public static Sprite mushroom;
 	public static String levelPath = "/level.png";
+
 	
 	private Thread thread;
 	private boolean running = false;

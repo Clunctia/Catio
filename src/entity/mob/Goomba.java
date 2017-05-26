@@ -1,6 +1,7 @@
 package entity.mob;
 
 import java.awt.Graphics;
+import java.util.Random;
 
 import Catio.Game;
 import Catio.Handler;
@@ -12,9 +13,22 @@ public class Goomba extends Entity{
 	private int frame = 0;
 	private int frameDelay = 0;
 	private boolean animate = false;
+	private Random random = new Random();
+	
 	public Goomba(int x, int y, int width, int height, boolean solid, Id id, Handler handler) {
 		super(x, y, width, height, solid, id, handler);
-		// TODO Auto-generated constructor stub
+		
+		int dir = random.nextInt(2);
+		switch(dir){
+		case 0:
+			setVelX(-1);
+			facing = 1;
+			break;
+		case 1:
+			setVelX(1);
+			facing = 0;
+			break;
+		}
 	}
 	public void render(Graphics g){
 		if (facing == 0) {
@@ -25,8 +39,8 @@ public class Goomba extends Entity{
 		}
 	}
 	public void tick(){
-		x=velX;
-		y=velY;
+		x+=velX;
+		y+=velY;
 		
 		for (int i = 0; i < handler.tile.size(); i++) {
 			Tile t = handler.tile.get(i);
@@ -41,9 +55,11 @@ public class Goomba extends Entity{
 				}
 				if (getBoundsLeft().intersects(t.getBounds())) {
 					setVelX(1);
+					facing = 1;
 				}
 				if (getBoundsRight().intersects(t.getBounds())) {
 					setVelX(-1);
+					facing = 0;
 				}
 			}
 		}

@@ -74,9 +74,12 @@ public class Player extends Entity {
 					height*=2;
 					setX(tpX-width);
 					setY(tpY-height);
-					
 					e.die();
+					
 				}else if(e.getId()==Id.goomba){
+					if(getBoundsBottom().intersects(e.getBoundsTop())){
+						e.die();
+					}
 					if(getBounds().intersects(e.getBounds())){
 						die();
 					}

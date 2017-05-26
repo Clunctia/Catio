@@ -38,7 +38,7 @@ public abstract class Entity {
 	public abstract void tick();
 	
 	public void die(){
-		handler.remoceEntity(this);
+		handler.removeEntity(this);
 	}
 	
 	
