@@ -4,11 +4,14 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
-import graphic.Sprite;
-import graphic.SpriteSheet;
+import Catio.graphic.Sprite;
+import Catio.graphic.SpriteSheet;
 import entity.Entity;
 import entity.Player;
 import input.KeyInput;
@@ -22,12 +25,14 @@ public class Game extends Canvas implements Runnable {
 	public static final String TITLE = "Catio";
 	public static Handler handler;
 	public static SpriteSheet sheet;
-	//public static Camera cam;
+	public static Camera cam;
 	public static Sprite grass;
-	public static Sprite player[]=new Sprite[10];
+	public static Sprite player[];
+	public static String levelPath = "/level.png";
 	
 	private Thread thread;
 	private boolean running = false;
+	private BufferedImage image;
 	
 	public synchronized void start(){
 		if(running)return;
@@ -74,6 +79,7 @@ public class Game extends Canvas implements Runnable {
 			}
 		}stop();
 	}
+	
 	public void render(){
 		BufferStrategy bs = getBufferStrategy();
 		if (bs==null){
@@ -82,8 +88,8 @@ public class Game extends Canvas implements Runnable {
 			}
 		Graphics g = bs.getDrawGraphics();
 		g.setColor(Color.CYAN);
-		g.fillRect(0,0,getWidth(),getHeight());
-		//g.translate(cam.getX(),cam.getY());
+		g.fillRect(0, 0, getWidth(), getHeight());
+		g.translate(cam.getX(), cam.getY());
 		handler.render(g);
 		g.dispose();
 		bs.show();
@@ -93,7 +99,7 @@ public class Game extends Canvas implements Runnable {
 		handler.tick();
 		for(Entity e:handler.entity){
 			if(e.getId()==Id.player){
-				//cam.tick(e);
+				cam.tick(e);
 			}
 		}
 	}
@@ -109,14 +115,23 @@ public class Game extends Canvas implements Runnable {
 	private void init(){
 		handler = new Handler();
 		sheet = new SpriteSheet("/spritesheet.png");
-		//cam = new Camera();
-		addKeyListener(new KeyInput());
+		cam = new Camera(this);
 		grass = new Sprite(sheet,1,1);
+		player = new Sprite[10];
+		addKeyListener(new KeyInput());
+		
+		
 		for(int i=0;i<player.length;i++){
 			player[i] = new Sprite(sheet,i+1,32/2);
 		}
 		
-		handler.addEntity(new Player(300, 512, 64, 64, true, Id.player, handler));
+		
+		try {
+			image = ImageIO.read(getClass().getResource(levelPath));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		handler.createLevel(image);
 	}
 	
 	public Game(){

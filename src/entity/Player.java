@@ -32,8 +32,6 @@ public class Player extends Entity {
 	public void tick() {
 		x += velX;
 		y += velY;
-		if (y + height >= 771)
-			y = 771 - height;
 		if (velX != 0) {
 			animate = true;
 		} else {
@@ -47,7 +45,7 @@ public class Player extends Entity {
 					setVelY(0);
 					if (jumping) {
 						jumping = false;
-						gravity = 0.8;
+						gravity = 0.1;
 						falling = true;
 					}
 				}
@@ -66,7 +64,7 @@ public class Player extends Entity {
 					x = t.getX() - t.width;
 				} else {
 					if (!falling && !jumping) {
-						gravity = 0.8;
+						gravity = 0.1;
 						falling = true;
 					}
 				}
