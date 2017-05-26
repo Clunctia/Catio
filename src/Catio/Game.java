@@ -7,8 +7,8 @@ import java.awt.image.BufferStrategy;
 
 import javax.swing.JFrame;
 
-import Catio.graphic.Sprite;
-import Catio.graphic.SpriteSheet;
+import graphic.Sprite;
+import graphic.SpriteSheet;
 import entity.Entity;
 import entity.Player;
 import input.KeyInput;
@@ -22,7 +22,7 @@ public class Game extends Canvas implements Runnable {
 	public static final String TITLE = "Catio";
 	public static Handler handler;
 	public static SpriteSheet sheet;
-	public static Camera cam;
+	//public static Camera cam;
 	public static Sprite grass;
 	public static Sprite player[]=new Sprite[10];
 	
@@ -83,7 +83,7 @@ public class Game extends Canvas implements Runnable {
 		Graphics g = bs.getDrawGraphics();
 		g.setColor(Color.CYAN);
 		g.fillRect(0,0,getWidth(),getHeight());
-		g.translate(cam.getX(),cam.getY());
+		//g.translate(cam.getX(),cam.getY());
 		handler.render(g);
 		g.dispose();
 		bs.show();
@@ -93,7 +93,7 @@ public class Game extends Canvas implements Runnable {
 		handler.tick();
 		for(Entity e:handler.entity){
 			if(e.getId()==Id.player){
-				cam.tick(e);
+				//cam.tick(e);
 			}
 		}
 	}
@@ -109,7 +109,7 @@ public class Game extends Canvas implements Runnable {
 	private void init(){
 		handler = new Handler();
 		sheet = new SpriteSheet("/spritesheet.png");
-		cam = new Camera();
+		//cam = new Camera();
 		addKeyListener(new KeyInput());
 		grass = new Sprite(sheet,1,1);
 		for(int i=0;i<player.length;i++){
