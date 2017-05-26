@@ -32,45 +32,53 @@ public class Player extends Entity {
 	public void tick() {
 		x += velX;
 		y += velY;
-		if (velX != 0) {
-			animate = true;
-		} else {
-			animate = false;
-		}
-		for (Tile t : handler.tile) {
-			if (!t.solid)
-				break;
-			if (t.getId() == Id.wall) {
+		
+		for (int i = 0; i < handler.tile.size(); i++) {
+			Tile t = handler.tile.get(i);
+			if (t.isSolid()) {
 				if (getBoundsTop().intersects(t.getBounds())) {
 					setVelY(0);
 					if (jumping) {
 						jumping = false;
-						gravity = 0.1;
+						gravity = 0.8;
 						falling = true;
 					}
 				}
-				if (getBoundsBottom().intersects(t.getBounds())) {
+				if(getBoundsBottom().intersects(t.getBounds())){
 					setVelY(0);
-					if (falling)
-						falling = false;
-
+					if(falling)falling = false;
+				}
+				else if (!falling && !jumping) {
+					falling = true;
+					gravity = 0.8;
 				}
 				if (getBoundsLeft().intersects(t.getBounds())) {
 					setVelX(0);
-					x = t.getX() + t.width;
+					x = t.getX()+t.width;
 				}
 				if (getBoundsRight().intersects(t.getBounds())) {
 					setVelX(0);
-					x = t.getX() - t.width;
-				} else {
-					if (!falling && !jumping) {
-						gravity = 0.1;
-						falling = true;
-					}
+					x = t.getX()-t.width;
 				}
-
 			}
 		}
+		
+		for(int i=0;i<handler.entity.size();i++){
+			Entity e = handler.entity.get(i);
+			if(e.getId()==Id.mushroom){
+				if(getBounds().intersects(e.getBounds())){
+					int tpX = getX();
+					int tpY = getY();
+					width*=2;
+					height*=2;
+					setX(tpX-width);
+					setY(tpY-height);
+					
+					e.die();
+				}
+			}
+		}
+		
 		if (jumping) {
 			gravity -= 0.1;
 			setVelY((int) -gravity);
@@ -81,7 +89,7 @@ public class Player extends Entity {
 		} else if (falling) {
 			gravity += 0.1;
 			setVelY((int) gravity);
-		}
+		}    
 		if (animate) {
 			frameDelay++;
 			if (frameDelay >= 3) {

@@ -1,5 +1,5 @@
 package Catio;
 
 public enum Id {
-	player, wall;
+	player, wall, mushroom;
 }

@@ -28,6 +28,7 @@ public class Game extends Canvas implements Runnable {
 	public static Camera cam;
 	public static Sprite grass;
 	public static Sprite player[];
+	public static Sprite mushroom;
 	public static String levelPath = "/level.png";
 	
 	private Thread thread;
@@ -118,6 +119,7 @@ public class Game extends Canvas implements Runnable {
 		cam = new Camera(this);
 		grass = new Sprite(sheet,1,1);
 		player = new Sprite[10];
+		mushroom = new Sprite(sheet,2,1);
 		addKeyListener(new KeyInput());
 		
 		
