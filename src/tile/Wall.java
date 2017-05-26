@@ -3,6 +3,7 @@ package tile;
 import java.awt.Color;
 import java.awt.Graphics;
 
+import Catio.Game;
 import Catio.Handler;
 import Catio.Id;
 
@@ -14,8 +15,7 @@ public class Wall extends Tile{
 
 	@Override
 	public void render(Graphics g) {
-		g.setColor(Color.white);
-		g.fillRect(x, y, width, height);
+		g.drawImage(Game.grass.getBufferedImage(),x,y,width,height,null);
 	}
 
 	@Override

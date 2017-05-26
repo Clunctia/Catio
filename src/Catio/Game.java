@@ -7,6 +7,8 @@ import java.awt.image.BufferStrategy;
 
 import javax.swing.JFrame;
 
+import Catio.graphic.Sprite;
+import Catio.graphic.SpriteSheet;
 import entity.Player;
 import input.KeyInput;
 import tile.Wall;
@@ -18,6 +20,9 @@ public class Game extends Canvas implements Runnable {
 	public static final int SCALE = 4;
 	public static final String TITLE = "Catio";
 	public static Handler handler;
+	public static SpriteSheet sheet;
+	public static Sprite grass;
+	public static Sprite player[]=new Sprite[10];
 	
 	private Thread thread;
 	private boolean running = false;
@@ -87,7 +92,13 @@ public class Game extends Canvas implements Runnable {
 	
 	private void init(){
 		handler = new Handler();
+		sheet = new SpriteSheet("/spritesheet.png");
 		addKeyListener(new KeyInput());
+		grass = new Sprite(sheet,1,1);
+		for(int i=0;i<player.length;i++){
+			player[i] = new Sprite(sheet,i+1,32/2);
+		}
+		
 		handler.addEntity(new Player(300, 512, 64, 64, true, Id.player, handler));
 	}
 	

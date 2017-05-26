@@ -8,6 +8,7 @@ import java.awt.Rectangle;
 public abstract class Entity {
 	public int x,y;
 	public int width, height;
+	public int facing = 0;//0=left
 	public int velX, velY;
 	public double gravity;
 	
