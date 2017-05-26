@@ -29,7 +29,7 @@ public abstract class Entity {
 		this.handler = handler;
 		jumping = false;
 		falling = true;
-		gravity = 0.0;
+		gravity = 0.8;
 	}
 	
 	public abstract void render(Graphics g);
