@@ -2,9 +2,11 @@
 
 # Member
 1.Kasidid  Pholwannabha 5810546579 git Clunctia
+
 Graphics, Design pattern
 
 2.Sorawish Laovakul     5810545491 git Sorawish
+
 Game machanics
 
 # Patterns
